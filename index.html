@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SafeStudent — Digital Safety MVP</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><span>🛡️</span><div><b>SafeStudent</b><small>Digital Safety Platform</small></div></div>
+    <button class="nav active" onclick="showPage('student',this)">🏠 Student Safety</button>
+    <button class="nav" onclick="showPage('analyze',this)">🔍 Analyze</button>
+    <button class="nav" onclick="showPage('admin',this)">📊 Admin Dashboard</button>
+    <div class="side-note"><b>MVP Mode</b><br>Local safety engine is active. AWS/Bedrock can replace the analysis service later.</div>
+  </aside>
+
+  <main class="main">
+    <header><div><span class="eyebrow">INTELLIGENT DIGITAL SAFETY</span><h1 id="title">Student Safety</h1></div><div class="avatar">DS</div></header>
+
+    <section id="student" class="page">
+      <div class="hero">
+        <div><span class="pill green">● PROTECTED</span><h2>Stay safer online.</h2><p>Analyze suspicious messages and links before you act on them.</p><button class="primary" onclick="showPage('analyze')">Analyze Something →</button></div>
+        <div class="shield">🛡️</div>
+      </div>
+      <div class="cards">
+        <div class="card"><span>Scans</span><strong id="scanCount">0</strong><small>Messages analyzed</small></div>
+        <div class="card"><span>Warnings</span><strong id="warningCount">0</strong><small>High-risk detections</small></div>
+        <div class="card"><span>Safety score</span><strong>92%</strong><small>Demo health score</small></div>
+      </div>
+      <div class="info-grid">
+        <div class="panel"><h3>What we detect</h3><div class="feature">🎣 <b>Phishing</b><span>Credential and OTP theft</span></div><div class="feature">💬 <b>Cyberbullying</b><span>Abusive or harmful messages</span></div><div class="feature">🎁 <b>Scams</b><span>Fraudulent offers and requests</span></div><div class="feature">🔐 <b>Privacy risks</b><span>Requests for sensitive data</span></div></div>
+        <div class="panel"><h3>Safety tips</h3><p>Never share an OTP, password, or recovery code with another person.</p><p>Check links carefully before signing in.</p><p>If a message threatens or scares you, save it and tell a trusted adult.</p></div>
+      </div>
+    </section>
+
+    <section id="analyze" class="page hidden">
+      <div class="panel">
+        <span class="eyebrow">AI SAFETY CHECK</span><h2>Analyze a message or URL</h2>
+        <p class="muted">Paste content below. The MVP evaluates common phishing, scam, bullying, harassment and privacy indicators.</p>
+        <div class="tabs"><button class="tab active" onclick="setType('message',this)">💬 Message</button><button class="tab" onclick="setType('url',this)">🔗 URL</button></div>
+        <textarea id="content" placeholder="Example: Your school account will be deleted. Send me your OTP immediately..."></textarea>
+        <div class="actions"><button class="secondary" onclick="document.getElementById('content').value=''">Clear</button><button class="primary" onclick="analyze()">🔍 Analyze with Safety Engine</button></div>
+      </div>
+      <div id="result" class="panel hidden"></div>
+    </section>
+
+    <section id="admin" class="page hidden">
+      <div class="cards">
+        <div class="card"><span>Students</span><strong id="students">1,250</strong></div><div class="card"><span>Incidents</span><strong id="incidents">0</strong></div><div class="card"><span>Critical</span><strong id="critical">0</strong></div><div class="card"><span>Resolved</span><strong id="resolved">0</strong></div>
+      </div>
+      <div class="panel"><div class="panel-head"><div><h2>Recent incidents</h2><p class="muted">School safety team view</p></div><button class="secondary" onclick="loadDashboard()">↻ Refresh</button></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Type</th><th>Category</th><th>Risk</th><th>Status</th><th>Action</th></tr></thead><tbody id="incidentRows"><tr><td colspan="6" class="empty">No incidents yet. Analyze a message first.</td></tr></tbody></table></div></div>
+    </section>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
